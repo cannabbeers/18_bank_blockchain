@@ -29,6 +29,15 @@ from typing import Any, List
 import datetime as datetime
 import pandas as pd
 import hashlib
+import warnings
+from watermark import watermark
+
+print(watermark())
+print(watermark(iversions=True, globals_=globals(), packages=""))
+
+warnings.filterwarnings('ignore')
+pd.set_option('display.max_columns', 1000)
+pd.set_option('display.width', 1000)
 
 ################################################################################
 # Step 1:
@@ -49,7 +58,12 @@ import hashlib
 # @TODO
 # Create a Record Data Class that consists of the `sender`, `receiver`, and
 # `amount` attributes
-# YOUR CODE HERE
+
+@dataclass # decorator
+class Record: # defines 'Record Data Class' 
+    sender: str # attribute
+    receiver: str # attribute
+    amount: float # attribute
 
 
 ################################################################################
@@ -65,15 +79,15 @@ import hashlib
 
 @dataclass
 class Block:
-
-    # @TODO
-    # Rename the `data` attribute to `record`, and set the data type to `Record`
-    data: Any
-
+    record: Record # # # data: Any ### changed this STARTER CODE [was `data: Any`] per instruction # Now the `Block` class will have a `record` attribute, of 'Record Data Class'.
     creator_id: int
     prev_hash: str = "0"
     timestamp: str = datetime.datetime.utcnow().strftime("%H:%M:%S")
     nonce: int = 0
+
+    # @TODO <-- see above code
+    # Rename the `data` attribute to `record`, and set the data type to `Record` --- the STARTER CODE LINE per instruction ### 
+    # data: Any ### changed this STARTER CODE LINE per instruction ###
 
     def hash_block(self):
         sha = hashlib.sha256()
