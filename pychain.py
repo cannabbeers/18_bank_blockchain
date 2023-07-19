@@ -79,7 +79,7 @@ class Record: # defines 'Record Data Class'
 
 @dataclass
 class Block:
-    record: Record # # # data: Any ### changed this STARTER CODE [was `data: Any`] per instruction # Now the `Block` class will have a `record` attribute, of 'Record Data Class'.
+    record: Record # WAS "data: Any" # changed this STARTER CODE [was `data: Any`] per instruction # Now the `Block` class will have a `record` attribute, of 'Record Data Class'.
     creator_id: int
     prev_hash: str = "0"
     timestamp: str = datetime.datetime.utcnow().strftime("%H:%M:%S")
@@ -179,20 +179,29 @@ pychain = setup()
 # 5. As part of the Add Block button functionality, update `new_block` so that `Block` consists of an attribute named `record`, which is set equal to a `Record` that contains the `sender`, `receiver`, and `amount` values. The updated `Block`should also include the attributes for `creator_id` and `prev_hash`.
 
 # @TODO:
-# Delete the `input_data` variable from the Streamlit interface.
-input_data = st.text_input("Block Data")
+# ??????????????????????????????? Delete the `input_data` variable from the Streamlit interface. ????????????????????????
+# input_data = st.text_input("Block Data") # <----hashed out
 
 # @TODO:
 # Add an input area where you can get a value for `sender` from the user.
-# YOUR CODE HERE
+sender = st.text_input("Sender") # https://docs.streamlit.io/library/api-reference/widgets/st.text_input
 
 # @TODO:
 # Add an input area where you can get a value for `receiver` from the user.
-# YOUR CODE HERE
+receiver = st.text_input("Receiver")
 
 # @TODO:
 # Add an input area where you can get a value for `amount` from the user.
-# YOUR CODE HERE
+amount = st.number_input("Amount", step=0.01) # https://docs.streamlit.io/library/api-reference/widgets/st.number_input
+
+###############################################################
+# code source: https://docs.streamlit.io/library/api-reference
+# 
+# with st.form(key='my_form'):
+#     username = st.text_input("Username")
+#     password = st.text_input("Password")
+#     st.form_submit_button("Login") ```
+######################## TEST CODE ONCE REST WORKS #### highlight above and HOLD `Ctrl`+`/`
 
 if st.button("Add Block"):
     prev_block = pychain.chain[-1]
@@ -202,14 +211,19 @@ if st.button("Add Block"):
     # Update `new_block` so that `Block` consists of an attribute named `record`
     # which is set equal to a `Record` that contains the `sender`, `receiver`,
     # and `amount` values
+
+
+    record = Record(sender, receiver, amount) # Record class now holds the 3 user inputs equal to the `record` variable
+
     new_block = Block(
-        data=input_data,
+        record=record, ###### <<<---- changed from `data=input_data` as asked to remove from Streamlit earlier ### is this correct?? 
         creator_id=42,
         prev_hash=prev_block_hash
     )
 
-    pychain.add_block(new_block)
-    st.balloons()
+    pychain.add_block(new_block) # We add the newly created `Block` to PyChain
+
+    st.balloons() # visuals
 
 ################################################################################
 # Streamlit Code (continues)
@@ -219,10 +233,10 @@ st.markdown("## The PyChain Ledger")
 pychain_df = pd.DataFrame(pychain.chain).astype(str)
 st.write(pychain_df)
 
-difficulty = st.sidebar.slider("Block Difficulty", 1, 5, 2)
+difficulty = st.sidebar.slider("Block Difficulty", 1, 5, 2) # https://docs.streamlit.io/library/api-reference/widgets/st.slider
 pychain.difficulty = difficulty
 
-st.sidebar.write("# Block Inspector")
+st.sidebar.write("# Block Inspector") # https://docs.streamlit.io/library/api-reference/layout/st.sidebar
 selected_block = st.sidebar.selectbox(
     "Which block would you like to see?", pychain.chain
 )
