@@ -30,6 +30,8 @@ Block" button.
 4. Verify the block contents and hashes in the Streamlit drop-down menu.  Test the blockchain validation process by using the web interface.
    ![Full Ledger](/Images/full_ledger.gif)
    ![screenshot of the Streamlit application page -'Genesis Block'](/Images/genesis_block.gif)
+
+5. Test the blockchain validation process by using the web interface
    ![screenshot of the Gitbash "Winning Hash" & "Blockchain is Valid"](/Images/gitbash_valid_and_win_hash.gif)
    ![screenshot of the Streamlit application page validation](/Images/validate_true.gif)
 
