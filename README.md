@@ -54,3 +54,15 @@ Block" button.
         
         pandas   : 2.0.3
         streamlit: 1.24.1
+
+        
+## Contributors
+
+Mark Beers: 
+[Linked In](https://www.linkedin.com/in/markwbeers/)
+---
+
+## License
+
+MIT 
+
