@@ -24,9 +24,8 @@ add following if not already installed:
 3. Enter values for the sender, receiver, and amount, and then click the "Add
 Block" button.
 
-        + Do this several times to store several blocks in the ledger.
-
-        + [try the Random Name Generator](https://www.randomlists.com/random-names) for endless supply of senders and receivers to build the *PyChain*
++ Do this several times to store several blocks in the ledger.
++ [try the Random Name Generator](https://www.randomlists.com/random-names) for endless supply of senders and receivers to build the *PyChain*
 
 5. Verify the block contents and hashes in the Streamlit drop-down menu.
    ![Block Contents & Hashes](/Images/validate_chain_1.png)
